@@ -1,0 +1,12 @@
+﻿@model Login;
+@inject IHttpContextAccessor context;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (@context.HttpContext.Session.GetString("type")!=null)
+{
+<h1>@context.HttpContext.Session.GetString("type")</h1>
+}
+

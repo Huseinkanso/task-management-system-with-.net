@@ -1,0 +1,21 @@
+﻿@model CommentInfo
+@{
+    Layout = "_UserLayout";
+}
+@inject IHttpContextAccessor context;
+<!-- check if user login if so then show add comment -->
+@if (@context.HttpContext.Session.GetInt32("id")!=null)
+{
+    //@context.HttpContext.Session.GetInt32("id")
+    <form asp-action="CreateComment" asp-controller="User" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <input name="projectId" value="@Model.Id" hidden />
+            <input asp-for="Comment.LoginId" value="@context.HttpContext.Session.GetInt32("id")" hidden />
+            <input asp-for="Comment.TaskId" value="@Model.Id" hidden />
+            <label>add comment</label>
+            <input asp-for="Comment.Details" class="form-control" required />
+            <button type="submit" class="btn btn-primary" style="width: 150px">Add</button>
+        </div>
+    </form>
+}

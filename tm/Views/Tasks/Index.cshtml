@@ -1,0 +1,117 @@
+﻿@using tm.Models;
+@model TaskFilter
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        
+        <div class="col-6">
+            <h2 class="text-primary">task list </h2>
+            <form asp-asp-controller="Tasks" asp-action="Index">
+                <label asp-for="status">status:</label>
+                <select asp-for="status">
+                    <option value="">...</option>
+                    <option value="in progress">in progress</option>
+                    <option value="completed">completed</option>
+                    <option value="confirmed">confirmed</option>
+                </select>
+                <label asp-for="employee">employee:</label>
+                <select asp-for="employee">
+                    <option value="">...</option>
+                    @foreach(var emp in Model.employees)
+                    {
+                        <option value="@emp.Username">@emp.Username</option>
+                    }
+                </select>
+
+                <button type="submit" class="btn btn-primary">filter</button>
+            </form>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Tasks" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add New Task
+            </a>
+        </div>
+    </div>
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                     Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Starting date
+                </th>
+                <th>
+                    completion date
+                </th>
+                <th>
+                    assignedTo
+                </th>
+                <th>
+                    Project
+                </th>
+            </tr>
+        </thead>
+        <!----><tbody>
+            @foreach (var obj in Model.Tasks)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.Name
+                    </td>
+                    <td width="30%">
+                        @obj.Type
+                    </td>
+                    <td width="30%">
+                        @obj.Description
+                    </td>
+                    <td width="30%">
+                        @obj.Status
+                    </td>
+                    <td width="30%">
+                        @obj.StartingDate
+                    </td>
+                    <td width="30%">
+                        @obj.CompletionDate
+                    </td>
+                    <td width="30%">
+                        @obj.Login!.Username
+                    </td>
+                    <td width="30%">
+                        @obj.Project!.Name
+                    </td>
+                    
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Tasks" asp-action="Edit" asp-route-id="@obj.Id"
+                               class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-controller="Tasks" asp-action="Delete" asp-route-id="@obj.Id"
+                               class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+

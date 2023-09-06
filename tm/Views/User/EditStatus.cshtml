@@ -1,0 +1,19 @@
+﻿@model TaskEdit
+@{
+    
+    Layout = "_UserLayout";
+}
+
+<form asp-action="EditStatus" asp-controller="User" method="post">
+    <div>edit status:</div>
+    <div class="mb-3">
+        <input asp-for="Id" value="@Model.Id"  hidden/>
+        <label asp-for="Status">Status</label>
+        <select asp-for="Status">
+            <option value="in progress">in progress</option>
+            <option value="completed">completed</option>
+        </select>
+        <button type="submit" class="btn btn-primary">change</button>
+    </div>
+
+</form>

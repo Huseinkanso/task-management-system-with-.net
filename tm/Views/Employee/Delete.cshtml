@@ -1,0 +1,39 @@
+﻿@model Login
+@{
+    Layout = "_AdminLayout";
+}
+<form method="post" asp-action="DeleteEmp">
+	<input asp-for="Id" hidden />
+	<div class="border p-3 mt-4">
+        <div class="mb-3">
+            <label asp-for="Username">Username</label>
+            <input asp-for="Username" disabled class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" disabled class="form-control" />
+           
+        </div>
+        <div class="mb-3">
+            <label asp-for="Role">Role</label>
+            <select asp-for="Role" disabled>
+                <option>...</option>
+                <option>admin</option>
+                <option>employee</option>
+            </select>
+
+
+        </div>
+		<button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+		<a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

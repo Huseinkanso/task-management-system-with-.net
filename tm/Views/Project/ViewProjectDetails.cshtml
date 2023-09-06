@@ -1,0 +1,118 @@
+﻿@model Project
+@{
+    Layout = "_AdminLayout";
+}
+@inject IHttpContextAccessor context;
+<div class="container">
+    
+    <h1>Project Details:</h1>
+    <h2>Project Name: @Model.Name</h2>
+    <h3>Starting Date: @Model.StartingDate</h3>
+
+
+
+    <h1 style="padding:20px">Tasks</h1>
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Starting date
+                </th>
+                <th>
+                    completion date
+                </th>
+                <th>
+                    assignedTo
+                </th>
+            </tr>
+        </thead>
+        <!---->
+        <tbody>
+            @foreach (var obj in Model.Tasks)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.Name
+                    </td>
+                    <td width="30%">
+                        @obj.Type
+                    </td>
+                    <td width="30%">
+                        @obj.Description
+                    </td>
+                    <td width="30%">
+                        @obj.Status
+                    </td>
+                    <td width="30%">
+                        @obj.StartingDate
+                    </td>
+                    <td width="30%">
+                        @obj.CompletionDate
+                    </td>
+                    <td width="30%">
+                        @obj.Login.Username
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Tasks" asp-action="Edit" asp-route-id="@obj.Id"
+                               class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-controller="Tasks" asp-action="Delete" asp-route-id="@obj.Id"
+                               class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                </tr>
+               @if(obj.Comments!=null)
+                {
+                    <tr>Comments</tr>
+                    <tr>
+                        @foreach (var comment in obj.Comments)
+                        {
+                            <td class="container">
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <h5 class="card-title">@comment.Login.Username</h5>
+                                                        <p class="card-text">@comment.Details</p>
+                                                        <p class="card-text"><small class="text-muted">Posted on @comment.CreationDateTime</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                        }
+                    </tr>
+                }
+                @if (@context.HttpContext.Session.GetString("id")!=null)
+                {
+                    @context.HttpContext.Session.GetString("id")
+                    <tr width="100%">
+                        <td width="100%">
+                            <a asp-controller="Tasks" asp-route-id="@obj.Id" asp-action="CreateComment">add comment to task</a>
+                        </td>
+                    </tr>
+                }
+            
+            }
+        </tbody>
+
+    </table>
+</div>

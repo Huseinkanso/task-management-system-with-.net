@@ -1,0 +1,64 @@
+﻿@model             TaskManagement.Models.Tasks
+@{
+    Layout = "_AdminLayout";
+}
+<div class="container p-3">
+    <form asp-action="DeleteTask" asp-controller="Tasks" method="post" >
+        <input asp-for="Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Create Tasks</h2>
+                <hr />
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Name">Name</label>
+                <input disabled asp-for="Name" class="form-control" />
+                
+            </div>
+            <div class="mb-3">
+                <label asp-for="Status">Status</label>
+                <input disabled asp-for="Status" class="form-control" />
+                
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Type">Type</label>
+                <input disabled asp-for="Type" class="form-control" />
+               
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description">Description</label>
+                <textarea disabled asp-for="Description" class="form-control"></textarea>
+                
+            </div>
+            <div class="mb-3">
+                <label asp-for="Project">to project :</label>
+                @Model.Project.Name
+                
+
+            </div>
+            <div class="mb-3">
+                <label asp-for="Login">Assigne to :</label>
+                @Model.Login.Username
+                
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="StartingDate">Starting Date</label>
+                <input disabled asp-for="StartingDate" class="form-control" />
+                
+            </div>
+            <div class="mb-3">
+                <label asp-for="CompletionDate">Completion Date</label>
+                <input disabled asp-for="CompletionDate" class="form-control" />
+                
+            </div>
+            <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+            <a asp-controller="Tasks" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>

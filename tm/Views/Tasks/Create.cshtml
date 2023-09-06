@@ -1,0 +1,70 @@
+﻿@model TaskInfo
+@{
+    Layout = "_AdminLayout";
+}
+<div class="container p-3">
+    <form asp-action="Create" asp-controller="Tasks" method="post">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">Create Task</h2>
+                <hr />
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Task.Name">Name</label>
+                <input asp-for="Task.Name" class="form-control" />
+                <span asp-validation-for="Task.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Task.Status">Status</label>
+                <select asp-for="Task.Status" >
+                    <option value="in progress" >in progress</option>
+                    <option value="completed">completed</option>
+                    <option value="confirmed">confirmed</option>
+                </select>
+                <span asp-validation-for="Task.Status" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Task.Type">Type</label>
+                <input asp-for="Task.Type" class="form-control" />
+                <span asp-validation-for="Task.Type" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Task.Description">Description</label>
+                <textarea asp-for="Task.Description" class="form-control"></textarea>
+                <span asp-validation-for="Task.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Task.Project">to project :</label>
+                <select class="form-control" asp-for="Task.ProjectId" asp-items="@(new SelectList(Model.Projects, "Id", "Name"))"></select>
+                
+                <span asp-validation-for="Task.Project" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label asp-for="Task.Login">Assigne to :</label>
+                <select class="form-control" asp-for="Task.LoginId" asp-items="@(new SelectList(Model.Employees, "Id", "Username"))"></select>
+
+                
+                <span asp-validation-for="Task.Login" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Task.StartingDate">Starting Date</label>
+                <input asp-for="Task.StartingDate" class="form-control" />
+                <span asp-validation-for="Task.StartingDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Task.CompletionDate">Completion Date</label>
+                <input asp-for="Task.CompletionDate" class="form-control" />
+                <span asp-validation-for="Task.CompletionDate" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 150px">Add</button>
+            <a asp-controller="Tasks" asp-action="Create" class="btn btn-secondary" style="width: 150px">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>

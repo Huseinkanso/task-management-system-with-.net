@@ -1,0 +1,89 @@
+﻿@using tm.Models;
+@model IEnumerable<Tasks>
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_UserLayout";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+
+        <div class="col-6">
+            <h2 class="text-primary">all your tasks</h2>
+        </div>
+    </div>
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Starting date
+                </th>
+                <th>
+                    completion date
+                </th>
+                <th>
+                    assignedTo
+                </th>
+                <th>
+                    Project
+                </th>
+            </tr>
+        </thead>
+        <!---->
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.Name
+                    </td>
+                    <td width="30%">
+                        @obj.Type
+                    </td>
+                    <td width="30%">
+                        @obj.Description
+                    </td>
+                    <td width="30%">
+                        @obj.Status
+                    </td>
+                    <td width="30%">
+                        @obj.StartingDate
+                    </td>
+                    <td width="30%">
+                        @obj.CompletionDate
+                    </td>
+                    <td width="30%">
+                        @obj.Login!.Username
+                    </td>
+                    <td width="30%">
+                        @obj.Project!.Name
+                    </td>
+                    <td>
+                       <a asp-asp-controller="User" asp-action="EditStatus" asp-route-id="@obj.Id" >edit status</a>
+                    </td>
+                
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+
